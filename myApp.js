@@ -10,6 +10,9 @@ app.use("/public", express.static(__dirname + "/public"));
 //Body-parser
 app.use(bodyParser.urlencoded({extended: false}));
 
+// JSON
+app.use(express.json());
+
 //Remote Logger
 app.use((req, res, next) => {
   console.log(req.method, req.path,"- ",req.ip)
@@ -65,7 +68,17 @@ app.route('/name')
     })
 
     .post ((req,res,next) => {
-        //future is sus
+
+       let data = req.body;
+      
+        console.log(data.first);
+        console.log(data.last);
+
+        let First = data.first;
+        let Last =  data.last;      
+
+      res.send({name: `${First} ${Last}`});
+      
     })
 
 
